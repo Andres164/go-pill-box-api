@@ -1,0 +1,39 @@
+Requerimientos funcionales
+- alta receta medica
+
+- modificacion receta medica
+
+- marcar receta como terminada
+
+- Tener una base de datos con medicamentos comunes 
+  para que el usuario no tenga que ingresar manualmente
+  la informacion del medicamento
+
+- informar al usuario por medio de Push notifications 
+   30 minutos antes de la hora en la que tiene tomar el medicamento
+
+- Alarma 1 minuto antes de la hora indicada
+
+- Marcar la medicacion como tomada 
+
+- la alarma seguira sonando cada 5 minutos hasta que la medicacion
+  sea marcada como tomada
+
+- apartado de indicaciones y notas de cada medicacion
+
+- Log in
+
+- Visualizar Calendario con medicamentos
+
+- Al sonar la alarma deben mostrarse 3 opciones
+  - Marcar medicacion como tomada
+  - la voy a tomar
+  - posponer
+- al posponer una alarma se debe mostrar al usuario por cuanto tiempo
+  se va a posponer
+
+
+
+Por ver:
+- Evitar que el usuario salga de casa sin su medicacion
+- Escaneo de recetas

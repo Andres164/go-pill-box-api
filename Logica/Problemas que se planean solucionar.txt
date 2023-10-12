@@ -1,0 +1,16 @@
+Proposito principal: 
+- Recordatorio para tomar medicacion en el horario correcto
+- Evitar que se tomen docis de mas o de menos
+- evitar que te quedes sin pastillas a medio tratamiento
+- Calendario con historial pasado y futuro de medicacion
+- Poder posponer toma de medicamento
+- Tomar en cuenta si el medicamento se tomo fuera de tiempo
+
+Secundarios:
+- Conexion con alexa
+- Historial de tratamientos
+- llevar un Registro de alergias a medicamentos
+
+por ver:
+- Recordatorio de citas con doctor
+- historial de cuantas sobredosis tomo el usuario

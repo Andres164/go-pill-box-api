@@ -32,7 +32,9 @@ Requerimientos funcionales
 - al posponer una alarma se debe mostrar al usuario por cuanto tiempo
   se va a posponer
 
-
+- Si se pospone una alarma por mas de 30 minutos la siguiente vez que suene la alarma sonara el tiempo que se pospuso la alarma menos 15 minutos
+  hasta que vuelva a la hora original
+- notificar al usuario el nuevo horario temporal
 
 Por ver:
 - Evitar que el usuario salga de casa sin su medicacion

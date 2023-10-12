@@ -1,0 +1,22 @@
++ Usuarios
+    UserName
+    password
+
+
+
++ Tratamientos
+    DescripcionGeneral
+    
+
+
++ Medicamentos
+    Gramaje
+    CantidadPastillas
+
++ 
+
+
+
++ Calendario
+
++ 

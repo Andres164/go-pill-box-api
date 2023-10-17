@@ -1,4 +1,4 @@
-Proposito principal: 
+Proposito principal:
 - Recordatorio para tomar medicacion en el horario correcto
 - Evitar que se tomen docis de mas o de menos
 - evitar que te quedes sin pastillas a medio tratamiento

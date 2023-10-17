@@ -1,22 +1,22 @@
 + Usuarios
-    UserName
+    UserName  (PK)
     password
 
-
-
 + Tratamientos
+    tratamiento_id (PK)
     DescripcionGeneral
+    UserName (FK)
     
-
-
-+ Medicamentos
-    Gramaje
-    CantidadPastillas
-
-+ 
-
-
-
++ medicamento_tratamiento
+    medicamento_tratamiento_id (PK)
+    tratamiento_id (FK)
+    medicamento_id 
+    notas_medicas
+    cantidad_docis
+    unidad_medida_docis
+    -- frecuencia de toma
+    lapso_en_tratamiento
+    
 + Calendario
 
 + 

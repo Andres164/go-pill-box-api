@@ -1,0 +1,8 @@
+Paracetamol 6hr
+Naproxen 12hr
+
+P - 12:00
+N - 12:00
+P - 16:00
+P - 22:00
+N - 00:00

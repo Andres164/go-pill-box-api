@@ -1,22 +1,33 @@
 + Usuarios
-    UserName  (PK)
+    UserId  (PK)
+    UserName  
     password
 
 + Tratamientos
-    tratamiento_id (PK)
+    TratamientoId (PK)
     DescripcionGeneral
-    UserName (FK)
+    UserId (FK)
     
-+ medicamento_tratamiento
-    medicamento_tratamiento_id (PK)
-    tratamiento_id (FK)
-    medicamento_id 
-    notas_medicas
-    cantidad_docis
-    unidad_medida_docis
-    -- frecuencia de toma
-    lapso_en_tratamiento
++ MedicamentoTratamiento
+    MedicamentoTratamientoId (PK)
+    TratamientoId (FK)
+    MedicamentoId 
+    NotasMedicas
+    CantidadDocis
+    unidadMedidaDocis
+    FrecuenciaDeToma
+    LapsoEnTratamiento
     
-+ Calendario
 
-+ 
+
++ Medicamentos
+
++ EventoTomaDeMedicamento
+    EventoTomaDeMedicamentoId (PK)
+    MedicamentoTratamientoId (FK)
+    EventTimeStamp
+    State [Enum (Tomado, por tomar, no se tomo, pospuesto)]
+    PosponedForInMinutes [Defaul: 5]
+
+
+

@@ -23,6 +23,8 @@ Requerimientos funcionales
 
 - Log in
 
+- Crear cuenta
+
 - Visualizar Calendario con medicamentos
 
 - Al sonar la alarma deben mostrarse 3 opciones

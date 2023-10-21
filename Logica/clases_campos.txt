@@ -1,32 +1,34 @@
-+ Usuarios
++ Usuer
     UserId  (PK)
     UserName  
-    password
+    Password
 
-+ Tratamientos
-    TratamientoId (PK)
-    DescripcionGeneral
++ Treatment
+    TreatmentId (PK)
+    GeneralDescription
     UserId (FK)
     
-+ MedicamentoTratamiento
-    MedicamentoTratamientoId (PK)
-    TratamientoId (FK)
-    MedicamentoId 
-    NotasMedicas
-    CantidadDocis
-    unidadMedidaDocis
-    FrecuenciaDeToma
-    LapsoEnTratamiento
++ MedicationInTreatment
+    MedicationInTreatmentId (PK)
+    TreatmentId (FK)
+    MedicationId (FK)
+    MedicNotes
+    Dose
+    DoseUnitOfMesure
+    DosingFrequency
+    TimeInTreatmentInDays
     
-+ Medicamentos
++ Medication
+    MedicationId (PK)
+    BrandName
+    Ingridients [array]
 
-
-+ EventoTomaDeMedicamento
-    EventoTomaDeMedicamentoId (PK)
-    MedicamentoTratamientoId (FK)
++ AlarmEvent
+    AlarmEventId (PK)
+    MedicationInTreatmentId (FK)
     EventTimeStamp
-    State [Enum (Tomado, por tomar, no se tomo, pospuesto)]
-    PosponedForMinutes
+    State [Enum (Taken, Scheduled, Not taken, postponed)]
+    PosponedForMinutes Default 0
 
 
 

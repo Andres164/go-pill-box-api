@@ -1,4 +1,4 @@
-+ Usuer
++ User
     UserId  (PK)
     UserName  
     Password
@@ -20,8 +20,7 @@
     
 + Medication
     MedicationId (PK)
-    BrandName
-    Ingridients [array]
+    Name [array]
 
 + AlarmEvent
     AlarmEventId (PK)
@@ -30,5 +29,38 @@
     State [Enum (Taken, Scheduled, Not taken, postponed)]
     PosponedForMinutes Default 0
 
+ 
+--- VIEW MODELS ---
 
++ UserView
+    UserName
+    Password
 
++ TreatmentView
+    GeneralDescription
+    
++ MedicationInTreatmentView
+    MedicationInTreatmentId (PK)
+    MedicationId (FK)
+    MedicNotes
+    Dose
+    DoseUnitOfMesure
+    DosingFrequency
+    TimeInTreatmentInDays
+
++ MedicationInTreatmentRequest
+    MedicationId (FK)
+    MedicNotes
+    Dose
+    DoseUnitOfMesure
+    DosingFrequency
+    TimeInTreatmentInDays
+    
++ MedicationView
+    Name [array]
+
++ AlarmEventView
+    MedicationInTreatmentId (FK)
+    EventTimeStamp
+    State [Enum (Taken, Scheduled, Not taken, postponed)]
+    PosponedForMinutes Default 0

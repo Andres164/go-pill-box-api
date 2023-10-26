@@ -2,7 +2,7 @@
 {
     public class AlarmEvent
     {
-        public enum States { Taken, Scheduled, NotTaken, Postponed };
+        public enum States { Scheduled, Taken, Postponed, NotTaken };
 
         public int AlarmEventId { get; set; }
         public int MedicationInTreatmentid { get; set; }

@@ -24,7 +24,6 @@ PATCH
 /AlarmEvent
 GET
 POST
-DELETE
 PATCH
 
 Authentication/Authenticate/

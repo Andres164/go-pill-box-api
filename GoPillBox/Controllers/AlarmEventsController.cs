@@ -46,17 +46,20 @@ namespace GoPillBox.Controllers
         {
             AlarmEvent? createdAlarmEvent = await this._alarmEventRepository.CreateAsync(newAlarmEvent);
             if (createdAlarmEvent == null)
-                return StatusCode(500, "Unexpected error while creating the user, the user wasn't created");
+                return StatusCode(500, "Unexpected error while creating the user, the user couldn't be created");
             return Ok(createdAlarmEvent);
         }
 
         // PUT api/<AlarmEventsController>/5
         [HttpPut("{id}")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(AlarmEvent), 200)]
         [ProducesResponseType(404)]
-        public Task<IActionResult> Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] AlarmEventView modifiedAlarmEvent)
         {
-
+            AlarmEvent? updatedAlarmEvent = await this._alarmEventRepository.UpdateAsync(id, modifiedAlarmEvent);
+            if (updatedAlarmEvent == null)
+                return NotFound();
+            return Ok(updatedAlarmEvent);
         }
     }
 }

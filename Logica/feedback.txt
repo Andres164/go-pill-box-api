@@ -1,0 +1,5 @@
+Exeption handling a nivel del Servicio
+
+Logging
+1- Sistema de archivos
+2- Base de datos

@@ -8,8 +8,7 @@ namespace GoPillBox.Repositories.Contracts
         Task<List<AlarmEvent>> ReadAllAsync();
         Task<AlarmEvent?> ReadAsync(int alarmEventId);
         Task<AlarmEvent?> CreateAsync(AlarmEventView alarmEvent);
-        Task UpdateAsync(AlarmEventView alarmEvent);
-        Task DeleteAsync(int alarmEventId);
-
+        Task<AlarmEvent?> UpdateAsync(AlarmEventView alarmEvent);
+        Task<AlarmEvent?> DeleteAsync(int alarmEventId);
     }
 }

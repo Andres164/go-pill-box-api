@@ -3,7 +3,7 @@ using GoPillBox.Models;
 
 namespace GoPillBox.Repositories.Contracts
 {
-    public interface IUserRepository
+    public interface IUsersRepository
     {
         Task<List<User>> ReadAllAsync();
         Task<User?> ReadAsync(int userId);

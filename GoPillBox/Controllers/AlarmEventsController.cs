@@ -10,16 +10,16 @@ namespace GoPillBox.Controllers
     [ApiController]
     public class AlarmEventsController : ControllerBase
     {
-        private readonly IAlarmEventRepository _alarmEventRepository;
+        private readonly IAlarmEventsRepository _alarmEventRepository;
 
-        public AlarmEventsController(IAlarmEventRepository alarmEventRepository)
+        public AlarmEventsController(IAlarmEventsRepository alarmEventRepository)
         {
             this._alarmEventRepository = alarmEventRepository;
         }
 
         // GET: api/<AlarmEventsController>
         [HttpGet]
-        [ProducesResponseType(typeof(AlarmEvent), 200)]
+        [ProducesResponseType(typeof(List<AlarmEvent>), 200)]
         public async Task<IActionResult> Get()
         {
             List<AlarmEvent> alarEvents = await this._alarmEventRepository.ReadAllAsync();

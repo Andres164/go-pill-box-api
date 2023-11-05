@@ -3,7 +3,7 @@ using GoPillBox.Models.ViewModels;
 
 namespace GoPillBox.Repositories.Contracts
 {
-    public interface IAlarmEventRepository
+    public interface IAlarmEventsRepository
     {
         Task<List<AlarmEvent>> ReadAllAsync();
         Task<AlarmEvent?> ReadAsync(int alarmEventId);

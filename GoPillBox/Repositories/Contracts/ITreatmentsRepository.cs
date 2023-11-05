@@ -3,7 +3,7 @@ using GoPillBox.Models;
 
 namespace GoPillBox.Repositories.Contracts
 {
-    public interface ITreatmentRepository
+    public interface ITreatmentsRepository
     {
         Task<List<Treatment>> ReadAllAsync();
         Task<Treatment?> ReadAsync(int treatmentId);

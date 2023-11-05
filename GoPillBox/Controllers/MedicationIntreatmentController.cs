@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GoPillBox.Models;
+using GoPillBox.Models.ViewModels;
+using GoPillBox.Repositories.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,67 @@ namespace GoPillBox.Controllers
     [ApiController]
     public class MedicationIntreatmentController : ControllerBase
     {
+        private readonly IMedicationInTreatmentRepository _medicationInTreatmentRepo;
+
+        public MedicationIntreatmentController(IMedicationInTreatmentRepository medicationInTreatmentRepo)
+        {
+            this._medicationInTreatmentRepo = medicationInTreatmentRepo;
+        }
+
         // GET: api/<MedicationIntreatmentController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [ProducesResponseType(typeof(List<MedicationInTreatment>), 200)]
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<MedicationInTreatment> medicationInTreatments = await this._medicationInTreatmentRepo.ReadAllAsync();
+            return Ok(medicationInTreatments);
         }
 
         // GET api/<MedicationIntreatmentController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(typeof(MedicationInTreatment), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            MedicationInTreatment? medicationInTreatment = await this._medicationInTreatmentRepo.ReadAsync(id);
+            if (medicationInTreatment == null)
+                return NotFound();
+            return Ok(medicationInTreatment);
         }
 
         // POST api/<MedicationIntreatmentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(MedicationInTreatment), 200)]
+        public async Task<IActionResult> Post([FromBody] MedicationInTreatmentRequest newMedicationIntreatment)
         {
+            MedicationInTreatment? createdMedicationInTreatment = await this._medicationInTreatmentRepo.CreateAsync(newMedicationIntreatment);
+            if(createdMedicationInTreatment == null)
+                return NotFound();
+            return Ok(createdMedicationInTreatment);
         }
 
         // PUT api/<MedicationIntreatmentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(typeof(MedicationInTreatment), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Put(int id, [FromBody] MedicationInTreatmentRequest modifiedMedicationInTreatment)
         {
+            MedicationInTreatment? updatedMedicationInTreatment = await this._medicationInTreatmentRepo.UpdateAsync(id, modifiedMedicationInTreatment);
+            if (updatedMedicationInTreatment == null)
+                return NotFound();
+            return Ok(updatedMedicationInTreatment);
         }
 
         // DELETE api/<MedicationIntreatmentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(typeof(MedicationInTreatment), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Delete(int id)
         {
+            MedicationInTreatment? deletedMedicationInTreatment = await this._medicationInTreatmentRepo.DeleteAsync(id);
+            if (deletedMedicationInTreatment == null)
+                return NotFound();
+            return Ok(deletedMedicationInTreatment);
         }
     }
 }

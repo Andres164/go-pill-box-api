@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GoPillBox.Models;
+using GoPillBox.Models.ViewModels;
+using GoPillBox.Repositories.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,67 @@ namespace GoPillBox.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly IUsersRepository _usersRepository;
+
+        public UsersController(IUsersRepository usersRepository)
+        {
+            this._usersRepository = usersRepository;
+        }
+
         // GET: api/<UsersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [ProducesResponseType(typeof(List<User>), 200)]
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<User> users = await this._usersRepository.ReadAllAsync();
+            return Ok(users);
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(typeof(User), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            User? user = await this._usersRepository.ReadAsync(id);
+            if(user == null)
+                return NotFound();
+            return Ok(user);
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(User), 200)]
+        public async Task<IActionResult> Post([FromBody] UserView newUser)
         {
+            User? createdUser = await this._usersRepository.CreateAsync(newUser);
+            if (createdUser == null)
+                return StatusCode(500, "Error creating new user");
+            return Ok(createdUser);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(typeof(User), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Put(int id, [FromBody] UserView modifiedUser)
         {
+            User? updatedUser = await this._usersRepository.UpdateAsync(id, modifiedUser);
+            if (updatedUser == null)
+                return NotFound();
+            return Ok(updatedUser);
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [ProducesResponseType(typeof(User), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Delete(int id)
         {
+            User? deletedUser = await this._usersRepository.DeleteAsync(id);
+            if(deletedUser == null)
+                return NotFound();
+            return Ok(deletedUser);
         }
     }
 }

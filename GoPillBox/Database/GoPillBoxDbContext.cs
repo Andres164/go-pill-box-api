@@ -19,11 +19,5 @@ namespace GoPillBox.Database
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Server=127.0.0.1; Port=5432; Database=GoPillBoxDb; User Id=postgres; Password=admin");
-            base.OnConfiguring(optionsBuilder);
-        }
-
     }
 }

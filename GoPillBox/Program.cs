@@ -1,4 +1,11 @@
+using GoPillBox.Database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContextFactory<GoPillBoxDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("GoPillBoxDb")));
 
 // Add services to the container.
 
@@ -6,6 +13,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

@@ -2,6 +2,7 @@
 
 namespace GoPillBox.Models
 {
+    [Table("alarm_event")]
     public class AlarmEvent
     {
         public enum States { Scheduled, Taken, Postponed, NotTaken };

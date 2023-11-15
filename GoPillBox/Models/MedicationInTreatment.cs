@@ -21,6 +21,9 @@ namespace GoPillBox.Models
         [Column("medic_notes", TypeName = "character varying(350)")]
         public string MedicNotes { get; set; } = string.Empty;
 
+        [Column("medication_name", TypeName = "character varying(70)")]
+        public string MedicationName { get; set; } = string.Empty;
+
         [Column("dose")]
         public float Dose { get; set; }
 

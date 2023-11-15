@@ -2,7 +2,7 @@
 
 namespace GoPillBox.Models
 {
-    [Table("user")]
+    [Table("users")]
     public class User
     {
         [Column("user_id")]

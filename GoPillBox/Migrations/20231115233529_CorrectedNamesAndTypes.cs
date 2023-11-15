@@ -1,15 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace GoPillBox.Migrations
 {
     /// <inheritdoc />
-    public partial class CorrectedFieldNamesAndTypes : Migration
+    public partial class CorrectedNamesAndTypes : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Medications");
+
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Users",
                 table: "Users");
@@ -19,10 +23,6 @@ namespace GoPillBox.Migrations
                 table: "Treatments");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Medications",
-                table: "Medications");
-
-            migrationBuilder.DropPrimaryKey(
                 name: "PK_MedicationInTreatments",
                 table: "MedicationInTreatments");
 
@@ -30,134 +30,119 @@ namespace GoPillBox.Migrations
                 name: "PK_AlarmEvents",
                 table: "AlarmEvents");
 
+            migrationBuilder.DropColumn(
+                name: "MedicationId",
+                table: "MedicationInTreatments");
+
             migrationBuilder.RenameTable(
                 name: "Users",
-                newName: "user");
+                newName: "users");
 
             migrationBuilder.RenameTable(
                 name: "Treatments",
-                newName: "treatment");
-
-            migrationBuilder.RenameTable(
-                name: "Medications",
-                newName: "medication");
+                newName: "treatments");
 
             migrationBuilder.RenameTable(
                 name: "MedicationInTreatments",
-                newName: "medication_in_treatment");
+                newName: "medication_in_treatments");
 
             migrationBuilder.RenameTable(
                 name: "AlarmEvents",
-                newName: "alarm_event");
+                newName: "alarm_events");
 
             migrationBuilder.RenameColumn(
                 name: "Password",
-                table: "user",
+                table: "users",
                 newName: "password");
 
             migrationBuilder.RenameColumn(
                 name: "UserName",
-                table: "user",
+                table: "users",
                 newName: "user_name");
 
             migrationBuilder.RenameColumn(
                 name: "UserId",
-                table: "user",
+                table: "users",
                 newName: "user_id");
 
             migrationBuilder.RenameColumn(
                 name: "UserId",
-                table: "treatment",
+                table: "treatments",
                 newName: "user_id");
 
             migrationBuilder.RenameColumn(
                 name: "GeneralDescription",
-                table: "treatment",
+                table: "treatments",
                 newName: "general_description");
 
             migrationBuilder.RenameColumn(
                 name: "TreatmentId",
-                table: "treatment",
+                table: "treatments",
                 newName: "treatment_id");
 
             migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "medication",
-                newName: "name");
-
-            migrationBuilder.RenameColumn(
-                name: "MedicationId",
-                table: "medication",
-                newName: "medication_id");
-
-            migrationBuilder.RenameColumn(
                 name: "Dose",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "dose");
 
             migrationBuilder.RenameColumn(
                 name: "TreatmentId",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "treatment_id");
 
             migrationBuilder.RenameColumn(
                 name: "TimeInTreatmentInDays",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "time_in_treatment_in_days");
 
             migrationBuilder.RenameColumn(
-                name: "MedicationId",
-                table: "medication_in_treatment",
-                newName: "medication_id");
-
-            migrationBuilder.RenameColumn(
                 name: "MedicNotes",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "medic_notes");
 
             migrationBuilder.RenameColumn(
                 name: "DosingFrequencyInHours",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "dosing_frequency_in_hours");
 
             migrationBuilder.RenameColumn(
                 name: "DoseUnitOfMesure",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "dose_unit_of_mesure");
 
             migrationBuilder.RenameColumn(
                 name: "MedicationInTreatmentId",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 newName: "medication_in_treatment_id");
 
             migrationBuilder.RenameColumn(
                 name: "PostponedForInMinutes",
-                table: "alarm_event",
+                table: "alarm_events",
                 newName: "postponed_for_in_minutes");
 
             migrationBuilder.RenameColumn(
                 name: "MedicationInTreatmentid",
-                table: "alarm_event",
+                table: "alarm_events",
                 newName: "medication_in_treatment_id");
 
             migrationBuilder.RenameColumn(
                 name: "EventTimeStamp",
-                table: "alarm_event",
+                table: "alarm_events",
                 newName: "event_time_stamp");
 
             migrationBuilder.RenameColumn(
                 name: "CurrentState",
-                table: "alarm_event",
+                table: "alarm_events",
                 newName: "current_state");
 
             migrationBuilder.RenameColumn(
                 name: "AlarmEventId",
-                table: "alarm_event",
+                table: "alarm_events",
                 newName: "alarm_event_id");
 
             migrationBuilder.AlterColumn<string>(
                 name: "password",
-                table: "user",
+                table: "users",
                 type: "character varying(50)",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -165,7 +150,7 @@ namespace GoPillBox.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "user_name",
-                table: "user",
+                table: "users",
                 type: "character varying(50)",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -173,23 +158,15 @@ namespace GoPillBox.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "general_description",
-                table: "treatment",
+                table: "treatments",
                 type: "character varying(250)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "text");
 
             migrationBuilder.AlterColumn<string>(
-                name: "name",
-                table: "medication",
-                type: "character varying(70)",
-                nullable: false,
-                oldClrType: typeof(string[]),
-                oldType: "text[]");
-
-            migrationBuilder.AlterColumn<string>(
                 name: "medic_notes",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 type: "character varying(350)",
                 nullable: false,
                 oldClrType: typeof(string),
@@ -197,35 +174,37 @@ namespace GoPillBox.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "dose_unit_of_mesure",
-                table: "medication_in_treatment",
+                table: "medication_in_treatments",
                 type: "character varying(20)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "text");
 
+            migrationBuilder.AddColumn<string>(
+                name: "medication_name",
+                table: "medication_in_treatments",
+                type: "character varying(70)",
+                nullable: false,
+                defaultValue: "");
+
             migrationBuilder.AddPrimaryKey(
-                name: "PK_user",
-                table: "user",
+                name: "PK_users",
+                table: "users",
                 column: "user_id");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_treatment",
-                table: "treatment",
+                name: "PK_treatments",
+                table: "treatments",
                 column: "treatment_id");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_medication",
-                table: "medication",
-                column: "medication_id");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_medication_in_treatment",
-                table: "medication_in_treatment",
+                name: "PK_medication_in_treatments",
+                table: "medication_in_treatments",
                 column: "medication_in_treatment_id");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_alarm_event",
-                table: "alarm_event",
+                name: "PK_alarm_events",
+                table: "alarm_events",
                 column: "alarm_event_id");
         }
 
@@ -233,43 +212,39 @@ namespace GoPillBox.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropPrimaryKey(
-                name: "PK_user",
-                table: "user");
+                name: "PK_users",
+                table: "users");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_treatment",
-                table: "treatment");
+                name: "PK_treatments",
+                table: "treatments");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_medication_in_treatment",
-                table: "medication_in_treatment");
+                name: "PK_medication_in_treatments",
+                table: "medication_in_treatments");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_medication",
-                table: "medication");
+                name: "PK_alarm_events",
+                table: "alarm_events");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_alarm_event",
-                table: "alarm_event");
+            migrationBuilder.DropColumn(
+                name: "medication_name",
+                table: "medication_in_treatments");
 
             migrationBuilder.RenameTable(
-                name: "user",
+                name: "users",
                 newName: "Users");
 
             migrationBuilder.RenameTable(
-                name: "treatment",
+                name: "treatments",
                 newName: "Treatments");
 
             migrationBuilder.RenameTable(
-                name: "medication_in_treatment",
+                name: "medication_in_treatments",
                 newName: "MedicationInTreatments");
 
             migrationBuilder.RenameTable(
-                name: "medication",
-                newName: "Medications");
-
-            migrationBuilder.RenameTable(
-                name: "alarm_event",
+                name: "alarm_events",
                 newName: "AlarmEvents");
 
             migrationBuilder.RenameColumn(
@@ -318,11 +293,6 @@ namespace GoPillBox.Migrations
                 newName: "TimeInTreatmentInDays");
 
             migrationBuilder.RenameColumn(
-                name: "medication_id",
-                table: "MedicationInTreatments",
-                newName: "MedicationId");
-
-            migrationBuilder.RenameColumn(
                 name: "medic_notes",
                 table: "MedicationInTreatments",
                 newName: "MedicNotes");
@@ -341,16 +311,6 @@ namespace GoPillBox.Migrations
                 name: "medication_in_treatment_id",
                 table: "MedicationInTreatments",
                 newName: "MedicationInTreatmentId");
-
-            migrationBuilder.RenameColumn(
-                name: "name",
-                table: "Medications",
-                newName: "Name");
-
-            migrationBuilder.RenameColumn(
-                name: "medication_id",
-                table: "Medications",
-                newName: "MedicationId");
 
             migrationBuilder.RenameColumn(
                 name: "postponed_for_in_minutes",
@@ -417,13 +377,12 @@ namespace GoPillBox.Migrations
                 oldClrType: typeof(string),
                 oldType: "character varying(20)");
 
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Name",
-                table: "Medications",
-                type: "text[]",
+            migrationBuilder.AddColumn<int>(
+                name: "MedicationId",
+                table: "MedicationInTreatments",
+                type: "integer",
                 nullable: false,
-                oldClrType: typeof(string),
-                oldType: "character varying(70)");
+                defaultValue: 0);
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Users",
@@ -441,14 +400,22 @@ namespace GoPillBox.Migrations
                 column: "MedicationInTreatmentId");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Medications",
-                table: "Medications",
-                column: "MedicationId");
-
-            migrationBuilder.AddPrimaryKey(
                 name: "PK_AlarmEvents",
                 table: "AlarmEvents",
                 column: "AlarmEventId");
+
+            migrationBuilder.CreateTable(
+                name: "Medications",
+                columns: table => new
+                {
+                    MedicationId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string[]>(type: "text[]", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medications", x => x.MedicationId);
+                });
         }
     }
 }

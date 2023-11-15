@@ -1,4 +1,5 @@
 ﻿using GoPillBox.Database;
+using GoPillBox.Mappers;
 using GoPillBox.Models;
 using GoPillBox.Models.ViewModels;
 using GoPillBox.Repositories.Contracts;
@@ -46,11 +47,11 @@ namespace GoPillBox.Repositories
             }
         }
 
-        public async Task<AlarmEvent?> CreateAsync(AlarmEventView alarmEvent)
+        public async Task<AlarmEvent?> CreateAsync(AlarmEventView alarmEventView)
         {
             try
             {
-                AlarmEvent alarmEventModel = new (AlarmEvent)alarmEvent; // CONVERT VIEW
+                AlarmEvent alarmEventModel = AlarmEventMapper.ToModel(alarmEventView);
                 var createdAlarmEvent = await this._dbContext.AlarmEvents.AddAsync(alarmEventModel);
                 await this._dbContext.SaveChangesAsync();
                 return createdAlarmEvent.Entity;
@@ -62,11 +63,15 @@ namespace GoPillBox.Repositories
             }
         }
 
-        public Task<AlarmEvent?> DeleteAsync(int alarmEventId)
+        public async Task<AlarmEvent?> DeleteAsync(int alarmEventId)
         {
             try
             {
-                var deletedAlarmEvent = this._dbContext.Attach
+                var alarmEventToDelete = new AlarmEvent { AlarmEventId = alarmEventId };
+                var deletedAlarmEvent = this._dbContext.AlarmEvents.Remove(alarmEventToDelete);
+                await this._dbContext.SaveChangesAsync();
+                return deletedAlarmEvent.Entity;
+
             }
             catch (Exception ex)
             {
@@ -76,11 +81,16 @@ namespace GoPillBox.Repositories
         }
 
 
-        public Task<AlarmEvent?> UpdateAsync(int id, AlarmEventView alarmEvent)
+        public async Task<AlarmEvent?> UpdateAsync(int id, AlarmEventView alarmEventView)
         {
             try
             {
-
+                AlarmEvent modifiedAlarmEvent = AlarmEventMapper.ToModel(alarmEventView, id);
+                this._dbContext.Attach(modifiedAlarmEvent);
+                this._dbContext.Entry(modifiedAlarmEvent).State = EntityState.Modified;
+                if(await this._dbContext.SaveChangesAsync() < 1)
+                    return null;
+                return modifiedAlarmEvent;
             }
             catch (Exception ex)
             {

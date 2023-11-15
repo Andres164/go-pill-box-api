@@ -18,16 +18,7 @@ namespace GoPillBox.Repositories
 
         public async Task<List<User>> ReadAllAsync()
         {
-            try
-            {
-                List<User> users = await this._dbContext.Users.ToListAsync();
-
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
         public Task<User?> ReadAsync(int userId)

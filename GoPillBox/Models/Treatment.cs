@@ -2,7 +2,7 @@
 
 namespace GoPillBox.Models
 {
-    [Table("treatment")]
+    [Table("treatments")]
     public class Treatment
     {
         [Column("treatment_id")]

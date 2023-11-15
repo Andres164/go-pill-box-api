@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GoPillBox.Migrations
 {
     [DbContext(typeof(GoPillBoxDbContext))]
-    [Migration("20231114182217_CorrectedFieldNamesAndTypes")]
-    partial class CorrectedFieldNamesAndTypes
+    [Migration("20231115233529_CorrectedNamesAndTypes")]
+    partial class CorrectedNamesAndTypes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,26 +52,7 @@ namespace GoPillBox.Migrations
 
                     b.HasKey("AlarmEventId");
 
-                    b.ToTable("alarm_event");
-                });
-
-            modelBuilder.Entity("GoPillBox.Models.Medication", b =>
-                {
-                    b.Property<int>("MedicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("medication_id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MedicationId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("character varying(70)")
-                        .HasColumnName("name");
-
-                    b.HasKey("MedicationId");
-
-                    b.ToTable("medication");
+                    b.ToTable("alarm_events");
                 });
 
             modelBuilder.Entity("GoPillBox.Models.MedicationInTreatment", b =>
@@ -101,9 +82,10 @@ namespace GoPillBox.Migrations
                         .HasColumnType("character varying(350)")
                         .HasColumnName("medic_notes");
 
-                    b.Property<int>("MedicationId")
-                        .HasColumnType("integer")
-                        .HasColumnName("medication_id");
+                    b.Property<string>("MedicationName")
+                        .IsRequired()
+                        .HasColumnType("character varying(70)")
+                        .HasColumnName("medication_name");
 
                     b.Property<int>("TimeInTreatmentInDays")
                         .HasColumnType("integer")
@@ -115,7 +97,7 @@ namespace GoPillBox.Migrations
 
                     b.HasKey("MedicationInTreatmentId");
 
-                    b.ToTable("medication_in_treatment");
+                    b.ToTable("medication_in_treatments");
                 });
 
             modelBuilder.Entity("GoPillBox.Models.Treatment", b =>
@@ -138,7 +120,7 @@ namespace GoPillBox.Migrations
 
                     b.HasKey("TreatmentId");
 
-                    b.ToTable("treatment");
+                    b.ToTable("treatments");
                 });
 
             modelBuilder.Entity("GoPillBox.Models.User", b =>
@@ -162,7 +144,7 @@ namespace GoPillBox.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("user");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }

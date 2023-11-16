@@ -11,12 +11,12 @@ namespace GoPillBox.Repositories
     public class AlarmEventsRepository : IAlarmEventsRepository
     {
         private readonly GoPillBoxDbContext _dbContext;
-        private readonly ILoggingService _loggingService;
+        private readonly ILoggingService _logger;
 
         public AlarmEventsRepository(GoPillBoxDbContext dbContext, ILoggingService loggingService)
         {
             this._dbContext = dbContext;
-            this._loggingService = loggingService;
+            this._logger = loggingService;
         }
 
         public async Task<List<AlarmEvent>> ReadAllAsync()
@@ -28,7 +28,7 @@ namespace GoPillBox.Repositories
             }
             catch (Exception ex)
             {
-                this._loggingService.LogException(ex);
+                this._logger.LogException(ex);
                 throw;
             }
         }
@@ -42,7 +42,7 @@ namespace GoPillBox.Repositories
             }
             catch (Exception ex)
             {
-                this._loggingService.LogException(ex);
+                this._logger.LogException(ex);
                 throw;
             }
         }
@@ -58,7 +58,7 @@ namespace GoPillBox.Repositories
             }
             catch (Exception ex)
             {
-                this._loggingService.LogException(ex);
+                this._logger.LogException(ex);
                 throw;
             }
         }
@@ -75,7 +75,7 @@ namespace GoPillBox.Repositories
             }
             catch (Exception ex)
             {
-                this._loggingService.LogException(ex);
+                this._logger.LogException(ex);
                 throw;
             }
         }
@@ -94,7 +94,7 @@ namespace GoPillBox.Repositories
             }
             catch (Exception ex)
             {
-                this._loggingService.LogException(ex);
+                this._logger.LogException(ex);
                 throw;
             }
         }

@@ -16,5 +16,13 @@ namespace GoPillBox.Mappers
                 PostponedForInMinutes = fromView.PostponedForMinutes
             };
         }
+
+        public static void CopyModel(AlarmEvent fromModel,  AlarmEvent toModel)
+        {
+            toModel.MedicationInTreatmentId = fromModel.MedicationInTreatmentId;
+            toModel.CurrentState = fromModel.CurrentState;
+            toModel.EventTimeStamp = fromModel.EventTimeStamp;
+            toModel.PostponedForInMinutes = fromModel.PostponedForInMinutes;
+        }
     }
 }

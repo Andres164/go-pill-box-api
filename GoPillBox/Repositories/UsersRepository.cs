@@ -70,10 +70,11 @@ namespace GoPillBox.Repositories
         {
             try
             {
-                User userToDelete = new User { UserId = userId };
+                User? userToDelete = await this._dbContext.Users.FindAsync(userId);
+                if(userToDelete == null) return null;
+
                 var deletedUser = this._dbContext.Users.Remove(userToDelete);
                 await this._dbContext.SaveChangesAsync();
-                if(deletedUser == null) return null;
                 return deletedUser.Entity;
             }
             catch (Exception ex)
@@ -83,14 +84,19 @@ namespace GoPillBox.Repositories
             }
         }
 
-        public Task<User?> UpdateAsync(int id, UserView modifiedUser)
+        public async Task<User?> UpdateAsync(int id, UserView modifiedUser)
         {
             try
             {
+                
+                User? userToUpdate = await this._dbContext.Users.FindAsync(id);
+                if(userToUpdate == null) return null;
+
                 User updatedUser = UserMapper.ToModel(modifiedUser, id);
-                this._dbContext.Users.Attach(updatedUser);
-                this._dbContext.
-                this._dbContext.SaveChanges();
+                UserMapper.CopyModel(updatedUser, userToUpdate);
+                await this._dbContext.SaveChangesAsync();
+
+                return updatedUser;
             }
             catch (Exception ex)
             {

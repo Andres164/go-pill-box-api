@@ -67,9 +67,13 @@ namespace GoPillBox.Repositories
         {
             try
             {
-                var alarmEventToDelete = new AlarmEvent { AlarmEventId = alarmEventId };
-                var deletedAlarmEvent = this._dbContext.AlarmEvents.Remove(alarmEventToDelete);
+                AlarmEvent? alarmEventToDelete = await this._dbContext.AlarmEvents.FindAsync(alarmEventId);
+                if (alarmEventToDelete == null) return null;
+
+                var deletedUser = new AlarmEvent { AlarmEventId = alarmEventId };
+                var deletedAlarmEvent = this._dbContext.AlarmEvents.Remove(deletedUser);
                 await this._dbContext.SaveChangesAsync();
+
                 return deletedAlarmEvent.Entity;
 
             }
@@ -85,11 +89,12 @@ namespace GoPillBox.Repositories
         {
             try
             {
+                AlarmEvent? alarmEventToUpdate = await this._dbContext.AlarmEvents.FindAsync(id);
+                if (alarmEventToUpdate == null) return null;
+
                 AlarmEvent modifiedAlarmEvent = AlarmEventMapper.ToModel(alarmEventView, id);
                 this._dbContext.Attach(modifiedAlarmEvent);
                 this._dbContext.Entry(modifiedAlarmEvent).State = EntityState.Modified;
-                if(await this._dbContext.SaveChangesAsync() < 1)
-                    return null;
                 return modifiedAlarmEvent;
             }
             catch (Exception ex)

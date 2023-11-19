@@ -1,4 +1,5 @@
 ﻿using GoPillBox.Database;
+using GoPillBox.Mappers;
 using GoPillBox.Models;
 using GoPillBox.Models.ViewModels;
 using GoPillBox.Repositories.Contracts;
@@ -46,20 +47,56 @@ namespace GoPillBox.Repositories
             }
         }
 
-        public Task<UserMedication?> CreateAsync(UserMedicationView newUserMedication)
+        public async Task<UserMedication?> CreateAsync(UserMedicationView newUserMedication)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserMedication newUserMedicationModel = UserMedicationMapper.ToModel(newUserMedication);
+                var createdUserMedication = await this._dbContext.UserMedications.AddAsync(newUserMedicationModel);
+                await this._dbContext.SaveChangesAsync();
+                return createdUserMedication.Entity;
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogException(ex);
+                throw;
+            }
         }
 
-        public Task<UserMedication?> DeleteAsync(int userMedicationId)
+        public async Task<UserMedication?> DeleteAsync(int userMedicationId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserMedication? userMedicationToDelete = await this._dbContext.UserMedications.FindAsync(userMedicationId);
+                if (userMedicationToDelete == null) return null;
+                var deletedUserMedication = this._dbContext.UserMedications.Remove(userMedicationToDelete);
+                await this._dbContext.SaveChangesAsync();
+                return deletedUserMedication.Entity;
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogException(ex);
+                throw;
+            }
         }
 
 
-        public Task<UserMedication?> UpdateAsync(int id, UserMedicationView modifiedUserMedication)
+        public async Task<UserMedication?> UpdateAsync(int userMedicationId, UserMedicationView modifiedUserMedication)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserMedication modifiedUserMedicationModel = UserMedicationMapper.ToModel(modifiedUserMedication);
+                UserMedication? userMedicationToUpdate = await this._dbContext.UserMedications.FindAsync(userMedicationId);
+                if(userMedicationToUpdate == null) return null;
+                UserMedicationMapper.CopyModel(modifiedUserMedicationModel, userMedicationToUpdate);
+                await this._dbContext.SaveChangesAsync();
+                return modifiedUserMedicationModel;
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogException(ex);
+                throw;
+            }
         }
     }
 }

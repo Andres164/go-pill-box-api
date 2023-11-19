@@ -8,7 +8,7 @@ namespace GoPillBox.Repositories.Contracts
         Task<List<UserMedication>> ReadAllAsync();
         Task<UserMedication?> ReadAsync(int userMedicationId);
         Task<UserMedication?> CreateAsync(UserMedicationView newUserMedication);
-        Task<UserMedication?> UpdateAsync(int id, UserMedicationView modifiedUserMedication);
+        Task<UserMedication?> UpdateAsync(int userMedicationId, UserMedicationView modifiedUserMedication);
         Task<UserMedication?> DeleteAsync(int UserMedicationId);
     }
 }

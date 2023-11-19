@@ -5,12 +5,12 @@ namespace GoPillBox.Mappers
 {
     public static class UserMedicationMapper
     {
-        public static UserMedication ToModel(UserMedicationView fromView, int userId, int userMedicationId = 0) 
+        public static UserMedication ToModel(UserMedicationView fromView, int userMedicationId = 0) 
         {
             return new UserMedication
             {
-                UserId = userId,
                 UserMedicationId = userMedicationId,
+                UserId = fromView.UserId,
                 Dose = fromView.Dose,
                 DoseUnitOfMesure = fromView.DoseUnitOfMesure,
                 DosingFrequencyInHours = fromView.DosingFrequencyInHours,
@@ -18,6 +18,18 @@ namespace GoPillBox.Mappers
                 MedicNotes = fromView.MedicNotes,
                 TimeInTreatmentInDays = fromView.TimeInTreatmentInDays
             };
+        }
+
+        public static void CopyModel(UserMedication fromModel,  UserMedication toModel)
+        {
+            toModel.UserMedicationId = fromModel.UserId;
+            toModel.UserId = fromModel.UserId;
+            toModel.MedicNotes = fromModel.MedicNotes;
+            toModel.MedicationName = fromModel.MedicationName;
+            toModel.Dose = fromModel.Dose;
+            toModel.DoseUnitOfMesure = fromModel.DoseUnitOfMesure;
+            toModel.DosingFrequencyInHours = fromModel.DosingFrequencyInHours;
+            toModel.TimeInTreatmentInDays = fromModel.TimeInTreatmentInDays;
         }
     }
 }

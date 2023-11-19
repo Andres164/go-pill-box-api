@@ -16,7 +16,6 @@ builder.Services.AddDbContextFactory<GoPillBoxDbContext>(options =>
 
 builder.Services.AddScoped<IAlarmEventsRepository, AlarmEventsRepository>();
 builder.Services.AddScoped<IUserMedicationsRepository, UserMedicationsRepository>();
-builder.Services.AddScoped<ITreatmentsRepository, TreatmentsRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 // Add services to the container.
 

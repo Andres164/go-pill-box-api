@@ -55,8 +55,6 @@ namespace GoPillBox.Repositories
                 User newUserModel = UserMapper.ToModel(newUser);
                 var createdUser = await this._dbContext.AddAsync(newUserModel);
                 await this._dbContext.SaveChangesAsync();
-                if(createdUser == null)
-                    return null;
                 return createdUser.Entity;
             }
             catch (Exception ex)

@@ -7,23 +7,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoPillBox.Repositories
 {
-    public class MedicationInTreatmentRepository : IMedicationInTreatmentRepository
+    public class UserMedicationsRepository : IUserMedicationsRepository
     {
         private readonly GoPillBoxDbContext _dbContext;
         private readonly ILoggingService _logger;
 
-        public MedicationInTreatmentRepository(GoPillBoxDbContext dbContext, ILoggingService loggingService)
+        public UserMedicationsRepository(GoPillBoxDbContext dbContext, ILoggingService loggingService)
         {
             this._dbContext = dbContext;
             this._logger = loggingService;
         }
 
-        public async Task<List<MedicationInTreatment>> ReadAllAsync()
+        public async Task<List<UserMedication>> ReadAllAsync()
         {
             try
             {
-                List<MedicationInTreatment> medicationInTreatments = await this._dbContext.MedicationInTreatments.ToListAsync();
-                return medicationInTreatments;
+                List<UserMedication> userMedications = await this._dbContext.UserMedications.ToListAsync();
+                return userMedications;
             }
             catch (Exception ex)
             {
@@ -32,12 +32,12 @@ namespace GoPillBox.Repositories
             }
         }
 
-        public async Task<MedicationInTreatment?> ReadAsync(int medicationInTreatmentId)
+        public async Task<UserMedication?> ReadAsync(int userMedicationId)
         {
             try
             {
-                MedicationInTreatment? medicationInTreatment = await this._dbContext.MedicationInTreatments.FindAsync(medicationInTreatmentId);
-                return medicationInTreatment;
+                UserMedication? userMedication = await this._dbContext.UserMedications.FindAsync(userMedicationId);
+                return userMedication;
             }
             catch (Exception ex)
             {
@@ -46,18 +46,18 @@ namespace GoPillBox.Repositories
             }
         }
 
-        public Task<MedicationInTreatment?> CreateAsync(MedicationInTreatmentRequest newMedicationInTreatment)
+        public Task<UserMedication?> CreateAsync(UserMedicationView newUserMedication)
         {
             throw new NotImplementedException();
         }
 
-        public Task<MedicationInTreatment?> DeleteAsync(int medicationInTreatmentId)
+        public Task<UserMedication?> DeleteAsync(int userMedicationId)
         {
             throw new NotImplementedException();
         }
 
 
-        public Task<MedicationInTreatment?> UpdateAsync(int id, MedicationInTreatmentRequest modifiedMedicationInTreatment)
+        public Task<UserMedication?> UpdateAsync(int id, UserMedicationView modifiedUserMedication)
         {
             throw new NotImplementedException();
         }

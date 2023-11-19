@@ -93,8 +93,8 @@ namespace GoPillBox.Repositories
                 if (alarmEventToUpdate == null) return null;
 
                 AlarmEvent modifiedAlarmEvent = AlarmEventMapper.ToModel(alarmEventView, id);
-                this._dbContext.Attach(modifiedAlarmEvent);
-                this._dbContext.Entry(modifiedAlarmEvent).State = EntityState.Modified;
+                AlarmEventMapper.CopyModel(modifiedAlarmEvent, alarmEventToUpdate);
+                await this._dbContext.SaveChangesAsync();
                 return modifiedAlarmEvent;
             }
             catch (Exception ex)

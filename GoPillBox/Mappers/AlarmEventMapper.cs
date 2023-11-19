@@ -12,14 +12,14 @@ namespace GoPillBox.Mappers
                 AlarmEventId = alarmEventId,
                 CurrentState = fromView.CurrentState,
                 EventTimeStamp = fromView.EventTimeStamp,
-                MedicationInTreatmentId = fromView.MedicationInTreatmentId,
+                UserMedicationId = fromView.UserMedicationId,
                 PostponedForInMinutes = fromView.PostponedForMinutes
             };
         }
 
         public static void CopyModel(AlarmEvent fromModel,  AlarmEvent toModel)
         {
-            toModel.MedicationInTreatmentId = fromModel.MedicationInTreatmentId;
+            toModel.UserMedicationId = fromModel.UserMedicationId;
             toModel.CurrentState = fromModel.CurrentState;
             toModel.EventTimeStamp = fromModel.EventTimeStamp;
             toModel.PostponedForInMinutes = fromModel.PostponedForInMinutes;

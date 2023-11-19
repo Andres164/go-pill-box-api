@@ -3,15 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoPillBox.Models
 {
-    [Table("medication_in_treatments")]
-    public class MedicationInTreatment
+    [Table("user_medications")]
+    public class UserMedication
     {
-        [Column("medication_in_treatment_id")]
-        public int MedicationInTreatmentId { get; set; }
+        [Column("user_medication_id")]
+        public int UserMedicationId { get; set; }
 
-        [Column("treatment_id")]
-        [ForeignKey(nameof(Treatment))]
-        public int TreatmentId { get; set; }
+        [Column("user_id")]
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
 
         [Column("medic_notes", TypeName = "character varying(350)")]
         public string MedicNotes { get; set; } = string.Empty;

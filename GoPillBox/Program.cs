@@ -15,7 +15,7 @@ builder.Services.AddDbContextFactory<GoPillBoxDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GoPillBoxDb")));
 
 builder.Services.AddScoped<IAlarmEventsRepository, AlarmEventsRepository>();
-builder.Services.AddScoped<IMedicationInTreatmentRepository, MedicationInTreatmentRepository>();
+builder.Services.AddScoped<IUserMedicationsRepository, UserMedicationsRepository>();
 builder.Services.AddScoped<ITreatmentsRepository, TreatmentsRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 // Add services to the container.

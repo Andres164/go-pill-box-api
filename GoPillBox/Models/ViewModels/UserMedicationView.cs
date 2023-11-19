@@ -1,8 +1,8 @@
 ﻿namespace GoPillBox.Models.ViewModels
 {
-    public class MedicationIntreatmentView
+    public class UserMedicationView
     {
-        public int MedicationInTreatmentId { get; set; }
+        public int UserId { get; set; }
         public string MedicationName { get; set; } = string.Empty;
         public string MedicNotes { get; set; } = string.Empty;
         public float Dose { get; set; }

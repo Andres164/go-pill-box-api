@@ -10,9 +10,9 @@ namespace GoPillBox.Models
         [Column("alarm_event_id")]
         public int AlarmEventId { get; set; }
 
-        [Column("medication_in_treatment_id")]
-        [ForeignKey(nameof(MedicationInTreatment))]
-        public int MedicationInTreatmentId { get; set; }
+        [Column("user_medication_id")]
+        [ForeignKey(nameof(UserMedication))]
+        public int UserMedicationId { get; set; }
 
         [Column("event_time_stamp")]
         public DateTime EventTimeStamp { get; set; }

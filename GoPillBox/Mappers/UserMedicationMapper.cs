@@ -22,7 +22,6 @@ namespace GoPillBox.Mappers
 
         public static void CopyModel(UserMedication fromModel,  UserMedication toModel)
         {
-            toModel.UserMedicationId = fromModel.UserId;
             toModel.UserId = fromModel.UserId;
             toModel.MedicNotes = fromModel.MedicNotes;
             toModel.MedicationName = fromModel.MedicationName;

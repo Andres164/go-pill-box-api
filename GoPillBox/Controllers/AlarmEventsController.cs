@@ -61,5 +61,17 @@ namespace GoPillBox.Controllers
                 return NotFound();
             return Ok(updatedAlarmEvent);
         }
+
+        // DELETE api/<AlarmEventsController>/5
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(AlarmEvent), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            AlarmEvent? alarmEventToDelete = await this._alarmEventRepository.DeleteAsync(id);
+            if(alarmEventToDelete == null)
+                return NotFound();
+            return Ok(alarmEventToDelete);
+        }
     }
 }

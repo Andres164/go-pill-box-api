@@ -69,9 +69,7 @@ namespace GoPillBox.Repositories
             {
                 AlarmEvent? alarmEventToDelete = await this._dbContext.AlarmEvents.FindAsync(alarmEventId);
                 if (alarmEventToDelete == null) return null;
-
-                var deletedUser = new AlarmEvent { AlarmEventId = alarmEventId };
-                var deletedAlarmEvent = this._dbContext.AlarmEvents.Remove(deletedUser);
+                var deletedAlarmEvent = this._dbContext.AlarmEvents.Remove(alarmEventToDelete);
                 await this._dbContext.SaveChangesAsync();
 
                 return deletedAlarmEvent.Entity;

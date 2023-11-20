@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GoPillBox.Migrations
 {
     [DbContext(typeof(GoPillBoxDbContext))]
-    [Migration("20231119041540_RemovedTreatmentsAndRenamedMedicationInTreatment")]
+    [Migration("20231119230444_RemovedTreatmentsAndRenamedMedicationInTreatment")]
     partial class RemovedTreatmentsAndRenamedMedicationInTreatment
     {
         /// <inheritdoc />

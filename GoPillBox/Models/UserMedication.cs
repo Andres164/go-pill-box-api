@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoPillBox.Models
@@ -8,6 +9,7 @@ namespace GoPillBox.Models
     public class UserMedication
     {
         [Column("user_medication_id")]
+        [Key]
         public int UserMedicationId { get; set; }
 
         [Column("user_id")]

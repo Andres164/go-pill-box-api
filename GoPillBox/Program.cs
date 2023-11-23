@@ -14,10 +14,11 @@ builder.Services.AddScoped<ILoggingService, LoggingService>();
 builder.Services.AddDbContextFactory<GoPillBoxDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GoPillBoxDb")));
 
+// Add services to the container.
 builder.Services.AddScoped<IAlarmEventsRepository, AlarmEventsRepository>();
 builder.Services.AddScoped<IUserMedicationsRepository, UserMedicationsRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
-// Add services to the container.
+builder.Services.AddScoped<UserAuthenticationService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

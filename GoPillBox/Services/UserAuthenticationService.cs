@@ -1,5 +1,7 @@
 ﻿using GoPillBox.Database;
+using GoPillBox.Models;
 using GoPillBox.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoPillBox.Services
 {
@@ -14,11 +16,16 @@ namespace GoPillBox.Services
             this._logger = logger;
         }
 
-        public async bool AreCredentialsValid(UserView userCredentials)
+        public async Task<bool> AreCredentialsValid(UserView userCredentials)
         {
             try
             {
-                var user = await this._goPillBoxDbContext.Users.FindAsync(userCredentials);
+                User? user = await this._goPillBoxDbContext.Users.FirstOrDefaultAsync(u => u.UserName == userCredentials.UserName);
+                if (user == null) 
+                    return false;
+                if(user.Password != userCredentials.Password) 
+                    return false;
+                return true;
             }
             catch (Exception ex)
             {

@@ -10,22 +10,23 @@ namespace GoPillBox.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly GoPillBoxDbContext _dbContext;
-        private readonly ILoggingService _logger;
+        private readonly UserAuthenticationService _userAuthenticationService;
 
-        AuthenticationController(GoPillBoxDbContext dbContext, ILoggingService logger) 
+        public AuthenticationController(UserAuthenticationService userAuthenticationService) 
         {
-            this._dbContext = dbContext;
-            this._logger = logger;
+            this._userAuthenticationService = userAuthenticationService;
         }
 
         // POST: api/<AuthenticationController>/Authenticate/
         [HttpPost]
         [ProducesResponseType(typeof(User), 200)]
         [ProducesResponseType(401)]
-        public IActionResult Authenticate([FromBody] UserView userCredentials)
+        public async Task<IActionResult> Authenticate([FromBody] UserView userCredentials)
         {
-
+            bool areCredentialsValid = await this._userAuthenticationService.AreCredentialsValid(userCredentials);
+            if (!areCredentialsValid)
+                return Unauthorized();
+            return Ok(userCredentials);
         }
 
         // GET: api/<AuthenticationController>

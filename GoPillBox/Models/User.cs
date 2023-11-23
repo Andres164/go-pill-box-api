@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoPillBox.Models
 {
     [Table("users")]
+    [Index(nameof(UserName), IsUnique = true)]
     public class User
     {
         [Column("user_id")]
